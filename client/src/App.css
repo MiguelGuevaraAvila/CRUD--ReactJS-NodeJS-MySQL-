@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .form{
@@ -14,4 +15,27 @@
   height: 60px;
   margin: 10px;
   font-size: 25px;
+}
+
+aside{
+  display: inline-flex;
+  width: 100vw;
+  flex-wrap: wrap;
+}
+
+.card{
+  max-width: 350px;
+  height: 180px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  margin: 10px;
+  padding: 20px;
+  box-shadow: 1px 2px 0 0 #123;
+}
+.card button:first-child{
+  float: right;
+}
+.card input{
+  height: 20px;
+  width: 100px;
 }

@@ -19,11 +19,13 @@ function App() {
       'bookName':bookName,
       'bookReview':bookReview
     }).then(()=>{
-      alert('Review successfully submitted');
+      setBookList([...bookReviewList,{bookName:bookName,bookReview:bookReview}]);
     })
   };
 
-
+  const deleteBook = (bookName)=>{
+    Axios.delete(`http://localhost:3001/api/delete/${bookName}`);
+  };
 
   return (
     <div className="App">
@@ -40,11 +42,12 @@ function App() {
         }}/>
 
           <button onClick={submitReview}>Submit</button>
-
+          <aside>
           {
             bookReviewList.map((val)=>{
               return (
-                <div>
+                <div className='card'>
+                    <button onClick={()=>deleteBook(val.bookName)}> X </button>
                     <h3>Nombre del Libro :     
                       <span>
                         {val.bookName} 
@@ -53,9 +56,12 @@ function App() {
                     <p>
                       Opiniones del libro : {val.bookReview}
                     </p>
+                    <input type="text" />
+                    <button>Update </button>
                 </div>)
             })
           }
+          </aside>
       </div>
     </div>
   );
