@@ -57,6 +57,18 @@ app.delete('/api/delete/:bookName', (req, res) => {
     });
 });
 
+app.put('/api/update', (req, res) =>{
+    const review = req.body.bookReview;
+    const name = req.body.bookName;
+    console.log(name + "" + review);
+    const sqlUpdate = "UPDATE book_reviews SET bookReview = ? WHERE bookName= ?";
+    db.query(sqlUpdate, [review , name], (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+    });
+})
+
 app.listen(3001, ()=>{
     console.log("running on port 3001");
 });

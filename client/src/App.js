@@ -7,6 +7,8 @@ function App() {
   const [bookName, setBookName ]= useState("");
   const [bookReview, setReview]= useState("");
   const [bookReviewList, setBookList] = useState([]);
+
+  const [newReview, setNewReview] = useState("");
   
   useEffect(()=>{
     Axios.get("http://localhost:3001/api/get").then((response)=>{
@@ -25,6 +27,14 @@ function App() {
 
   const deleteBook = (bookName)=>{
     Axios.delete(`http://localhost:3001/api/delete/${bookName}`);
+  };
+
+  const updateReview =(bookName)=>{
+    Axios.put("http://localhost:3001/api/update",{
+      bookName:bookName,
+      bookReview:newReview,
+    });
+    setNewReview("")
   };
 
   return (
@@ -56,8 +66,12 @@ function App() {
                     <p>
                       Opiniones del libro : {val.bookReview}
                     </p>
-                    <input type="text" />
-                    <button>Update </button>
+                    <input type="text" id="updateInput" onChange={(e)=>{
+                      setNewReview(e.target.value);
+                    }}/>
+                    <button onClick={()=>{
+                      updateReview(val.bookName,val.bookReview);
+                    }}>Update </button>
                 </div>)
             })
           }
